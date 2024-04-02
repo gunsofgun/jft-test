@@ -47,14 +47,14 @@
 
                                                 <td>
                                                     @if ($item->que_audio != null)
-                                                        <audio controls src="{{ url('storage/' . $item->que_audio) }}"></audio>
+                                                        <audio controls src="{{ URL::asset('storage/' . $item->que_audio); }}"></audio>
                                                     @else
                                                         <p>No Audio</p>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     @if ($item->que_img != null)
-                                                        <img src="{{ url('storage/' . $item->que_img) }}" alt="Image Question {{ $item->que_num }}" width="100">
+                                                        <img src="{{ URL::asset('storage/' . $item->que_img); }}" alt="Image Question {{ $item->que_num }}" width="100">
                                                     @else
                                                         <p>No Image</p>
                                                     @endif
@@ -73,7 +73,7 @@
                                                         @if ($item_opt->opt_img != null)
                                                             <p>
                                                                 {{ chr($loop->index + 65) }}. 
-                                                                <img src="{{ url('storage/' . $item_opt->opt_img) }}" alt="Image Option {{ chr($loop->index + 65) }}" width="100">
+                                                                <img src="{{ URL::asset('storage/' . $item_opt->opt_img); }}" alt="Image Option {{ chr($loop->index + 65) }}" width="100">
                                                             </p>
                                                         @endif
                                                     @endforeach

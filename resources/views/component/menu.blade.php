@@ -4,7 +4,7 @@
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2">
                 <div class="col-md-5 mb-2 mb-md-0">
                     <a href="/" class="text-light text-decoration-none fw-semibold fs-4">
-                        <img src="{{ url('images/logo-nakayoshi.png') }}" alt="" width="50">
+                        <img src="{{ URL::asset('images/logo-nakayoshi.png'); }}" alt="" width="50">
                         NAKAYOSHI GAKUIN CENTER
                     </a>
                 </div>

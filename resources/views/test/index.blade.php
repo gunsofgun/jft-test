@@ -61,7 +61,7 @@
 
                                                 @if ($que_selected->que_audio != null)
                                                     <div class="mt-3">
-                                                        <audio id="audioPlayer" src="{{ url('storage/' . $que_selected->que_audio) }}">
+                                                        <audio id="audioPlayer" src="{{ URL::asset('storage/' . $que_selected->que_audio); }}">
                                                             Audio not supported
                                                         </audio>
                                                         
@@ -81,7 +81,7 @@
 
                                                 <div class="my-4">
                                                     @if ($que_selected->que_img != null)
-                                                        <img src="{{ url('storage/' . $que_selected->que_img) }}" alt="Image Question {{ $que_selected->que_num }}" width="100">
+                                                        <img src="{{ URL::asset('storage/' . $que_selected->que_img); }}" alt="Image Question {{ $que_selected->que_num }}" width="100">
                                                     @endif
                                                 </div>
 
@@ -95,7 +95,7 @@
                                                             @endif
                                                             @if ($item->opt_img != null)
                                                                 <div class="card p-2" style="width: 12rem; border-color: #638C29; margin: 0;">
-                                                                    <img src="{{ url('storage/' . $item->opt_img) }}" class="card-img-top" alt="Image Option {{ $item->opt_char }}" width="100">
+                                                                    <img src="{{ URL::asset('storage/' . $item->opt_img); }}" class="card-img-top" alt="Image Option {{ $item->opt_char }}" width="100">
                                                                     <div class="text-center mt-2">
                                                                         <button class="btn btn-outline-green text-dark py-2 stretched-link" id="option-btn" type="button" onclick="changeStyle(this)" data-char="{{ $item->opt_char }}">{{ $item->opt_char }}.</button>
                                                                     </div>

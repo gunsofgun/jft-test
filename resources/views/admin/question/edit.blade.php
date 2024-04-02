@@ -40,7 +40,7 @@
 
                                     <div class="mb-3">
                                         @if ($data->que_audio != null)
-                                            <audio controls src="{{ url('storage/' . $data->que_audio) }}"></audio>
+                                            <audio controls src="{{ URL::asset('storage/' . $data->que_audio); }}"></audio>
                                         @else
                                             <p>No Audio</p>
                                         @endif
@@ -51,7 +51,7 @@
 
                                     <div class="mb-3">
                                         @if ($data->que_img != null)
-                                            <img src="{{ url('storage/' . $data->que_img) }}" alt="Image Question {{ $data->que_num }}" width="100">
+                                            <img src="{{ URL::asset('storage/' . $data->que_img); }}" alt="Image Question {{ $data->que_num }}" width="100">
                                         @else
                                             <p>No Image</p>
                                         @endif
@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="col-6">
                                                 @if ($data_opt->opt_img != null)
-                                                    <img src="{{ url('storage/' . $data_opt->opt_img) }}" alt="Image Option {{ chr($loop->index + 65) }}" width="100">
+                                                    <img src="{{ URL::asset('storage/' . $data_opt->opt_img); }}" alt="Image Option {{ chr($loop->index + 65) }}" width="100">
                                                 @else
                                                     <p>No Image</p>
                                                 @endif
