@@ -1,0 +1,13 @@
+{
+    "noto sans jp": {
+        "100": "noto_sans_jp_100_16a37c870104bad2fe6b56fb8bef80e1",
+        "200": "noto_sans_jp_200_0f5872dcf41bdb9139c6071c1d1558fa",
+        "300": "noto_sans_jp_300_3f003839faee97bf87daf97151694dd4",
+        "normal": "noto_sans_jp_normal_0f7006ef5aa22dc4b2394b75774b9d61",
+        "500": "noto_sans_jp_500_fcaed56b68590648b1ada77080054811",
+        "600": "noto_sans_jp_600_2776eb6349f0588612ecad1649e1e591",
+        "bold": "noto_sans_jp_bold_9951ef107282261e261156a1cc4b0d10",
+        "800": "noto_sans_jp_800_6477c2ab10fbe417b6bf7647692ae5da",
+        "900": "noto_sans_jp_900_73750a4f0deba200971fb9eecd195140"
+    }
+}

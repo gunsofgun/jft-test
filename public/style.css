@@ -1,0 +1,88 @@
+body {
+    background-color: #f2f4f5;
+}
+
+.i-menu {
+    font-size: 2rem; 
+    color: white;
+}
+
+.i-num {
+    font-size: 1.5rem; 
+    color: #638C29;
+}
+
+.i-aud {
+    font-size: 1.5rem; 
+    color: white;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.bg-green {
+    background-color: #638C29;
+}
+
+.btn-green {
+    background-color: #638C29;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #4e721a;
+    color: white;
+}
+
+.btn-outline-green {
+    color: #638C29;
+    border-color: #638C29;
+}
+
+.btn-outline-green:hover {
+    background-color: #4e721a;
+    color: white;
+}
+
+.btn-finish {
+    background-color: #ffce94;
+    color: #322d26;
+}
+
+.btn-finish:hover {
+    background-color: #dbac71;
+    color: #322d26;
+}
+
+.text-link {
+    color: #638C29;
+}
+
+.text-link:hover {
+    color: #4e721a;
+}
+
+.progress-bar-vertical {
+    width: 1.25rem;
+    min-height: 7rem;
+    margin: auto;
+    background: #d0cece;
+    display: -webkit-box;  
+    display: -ms-flexbox;  
+    display: -webkit-flex; 
+    display: flex;        
+    align-items: flex-end;
+    -webkit-align-items: flex-end;
+}
+
+.progress-bar-vertical-green {
+    width: 1.25rem;
+    background: #638C29;
+    display: -webkit-box;  
+    display: -ms-flexbox;  
+    display: -webkit-flex; 
+    display: flex;        
+    align-items: flex-end;
+    -webkit-align-items: flex-end;
+}
