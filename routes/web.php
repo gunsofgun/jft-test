@@ -35,6 +35,7 @@ Route::get('/result-test/download/pdf', [JftTestConstroller::class, 'download_pd
 Route::get('/list-package', [PackageTestController::class, 'index'])->middleware('isAdmin');
 
 Route::get('/package/{id}', [SectionController::class, 'index'])->middleware('isAdmin');
+Route::get('/result-test/download/pdf/{uid}', [SectionController::class, 'download_pdf'])->middleware('isAdmin');
 
 Route::get('/section/{id}', [QuestionController::class, 'index'])->middleware('isAdmin');
 Route::post('/question/{id}', [QuestionController::class, 'store'])->middleware('isAdmin');

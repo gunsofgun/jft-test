@@ -25,48 +25,52 @@
                         @endforeach
                     </div>
 
-                    <h2 class="text-center mt-5">Hasil Test</h2>
+                    {{-- <h2 class="text-center mt-5">Hasil Test</h2>
                     <hr>
-                    <table class="table table-striped table-bordered table-hover mt-3">
-                        <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Nama Peserta</th>
-                                <th scope="col">Nilai Hasil</th>
-                                <th scope="col">Nilai SV</th>
-                                <th scope="col">Nilai CE</th>
-                                <th scope="col">Nilai LC</th>
-                                <th scope="col">Nilai RC</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>Gunawan</td>
-                                <td>210</td>
-                                <td>70%</td>
-                                <td>75%</td>
-                                <td>80%</td>
-                                <td>85%</td>
-                                <td>
-                                    <a href="" class="btn btn-green">Download Result</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Vita</td>
-                                <td>240</td>
-                                <td>80%</td>
-                                <td>85%</td>
-                                <td>90%</td>
-                                <td>85%</td>
-                                <td>
-                                    <a href="" class="btn btn-green">Download Result</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="mx-3">
+                        <table class="table table-striped table-bordered table-hover mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nama Peserta</th>
+                                    <th scope="col">Nilai Hasil</th>
+                                    <th scope="col">Nilai SV</th>
+                                    <th scope="col">Nilai CE</th>
+                                    <th scope="col">Nilai LC</th>
+                                    <th scope="col">Nilai RC</th>
+                                    <th class="text-center" scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (count($result) == 0)
+                                    <tr>
+                                        <td colspan="8" class="text-center">Data Kosong!</td>
+                                    </tr>
+                                @else
+                                    @foreach ($result as $item)
+                                        @if (count($item['total_correct_section']) == 0)
+                                            <tr>
+                                                <td colspan="8" class="text-center">Data Kosong!</td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td>{{ $loop->index+1 }}</td>
+                                                <td>{{ $item['name'] }}</td>
+                                                <td>{{ $item['total_point'] }}</td>
+                                                <td>{{ ($item['total_correct_section'][1] / $item['total_que_section'][1]) * 100 }}%</td>
+                                                <td>{{ ($item['total_correct_section'][2] / $item['total_que_section'][2]) * 100 }}%</td>
+                                                <td>{{ ($item['total_correct_section'][3] / $item['total_que_section'][3]) * 100 }}%</td>
+                                                <td>{{ ($item['total_correct_section'][4] / $item['total_que_section'][4]) * 100 }}%</td>
+                                                <td class="text-center">
+                                                    <a href="/result-test/download/pdf/{{ $item['user_id'] }}" class="btn btn-green">Download Result</a>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div> --}}
                 </div>
             </div>
         </div>

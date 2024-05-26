@@ -35,9 +35,9 @@ class JftTestConstroller extends Controller
         }
 
         $data_package = PackageTest::where('id', Auth::user()->package)->first();
-        $data_question = Question::where('section_id', $ids)->get();
+        $data_question = Question::where('section_id', $ids)->get()->sortBy('que_num');
         $latest_q = $data_question->last();
-        $selected_question = $data_question->where('que_num', $num)->first();
+	$selected_question = $data_question->where('que_num', $num)->first();
 
         $user_answer_check = UserAnswer::where('user_id', $id_user)->first();
         $user_answered_details = UserAnswerDetail::where('user_answer_id', $user_answer_check->id)->get();
@@ -46,8 +46,8 @@ class JftTestConstroller extends Controller
         $que_answered_all = [];
 
         if(!$user_answered_details->isEmpty()) {
-            $que_answered = $user_answered_details->where('question_test_id', $selected_question->id)->first();
-            $que_answered_all = $user_answered_details->where('section_id', $ids)->get();
+            $que_answered = UserAnswerDetail::where('user_answer_id', $user_answer_check->id)->where('question_test_id', $selected_question->id)->first();
+            $que_answered_all = UserAnswerDetail::where('user_answer_id', $user_answer_check->id)->where('section_id', $ids)->get();
         }
         
         

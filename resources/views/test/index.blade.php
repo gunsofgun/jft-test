@@ -9,7 +9,19 @@
                     <div class="row">
                         <div class="col-1 text-center">
                             @foreach ($data_p->sections as $item)
-                                <a href="/do-test/sec/{{ $item->id }}/que/1" class="text-decoration-none">
+                                @php
+                                    $num = 0;
+                                    if($item->section_code == 'SV'){
+                                        $num = 1;
+                                    }else if($item->section_code == 'CE'){
+                                        $num = 16;
+                                    }else if($item->section_code == 'LC'){
+                                        $num = 31;
+                                    }else if($item->section_code == 'RC'){
+                                        $num = 46;
+                                    }
+                                @endphp
+                                <a href="/do-test/sec/{{ $item->id }}/que/{{ $num }}" class="text-decoration-none">
                                     <div class="card">
                                         <div class="card-body">
                                             {{ $item->section_code }}
@@ -28,22 +40,24 @@
                                     <div class="row">
                                         <div class="col-2">
                                             @foreach ($data_q as $item)
-                                                @if (isset($que_answered_all[$loop->index]))
-                                                    <a href="/do-test/sec/{{ $item->section_id }}/que/{{ $item->que_num }}" class="btn mb-2 text-decoration-none {{ ($que_answered_all[$loop->index]->question_test_id == $item->id) ? 'btn-secondary' : 'btn-green' }}" style="width: 5rem">
-                                                        {{ $item->que_num }}
-                                                    </a>
-                                                    @if ($que_selected->que_num == $item->que_num)
-                                                        <i class="bi bi-caret-right-fill i-num {{ $que_selected->que_num == $item->que_num ? 'text-secondary' : '' }} " style="position: absolute; left: 5.5rem; "></i>
-                                                    @endif
-                                                @else
-                                                    <a href="/do-test/sec/{{ $item->section_id }}/que/{{ $item->que_num }}" class="btn btn-green mb-2 text-decoration-none" style="width: 5rem">
-                                                        {{ $item->que_num }}
-                                                    </a>
-                                                    @if ($que_selected->que_num == $item->que_num)
-                                                        <i class="bi bi-caret-right-fill i-num" style="position: absolute; left: 5.5rem; "></i>
-                                                    @endif
+						@php
+                                                    $answeredColor = 'btn-green';
+                                                    $answeredColorCaret = '';
+                                                    foreach ($que_answered_all as $answer) {
+                                                        if ($item->id == $answer->question_test_id) {
+                                                            $answeredColor = 'btn-secondary';
+                                                            $answeredColorCaret = 'text-secondary';
+                                                            break;
+                                                        }
+                                                    }
+                                                @endphp
+                                                <a href="/do-test/sec/{{ $item->section_id }}/que/{{ $item->que_num }}" class="btn {{ $answeredColor }} mb-2 text-decoration-none" style="width: 5rem">
+                                                    {{ $item->que_num }}
+                                                </a>
+                                                @if ($que_selected->que_num == $item->que_num)
+                                                    <i class="bi bi-caret-right-fill i-num {{ $answeredColorCaret }}" style="position: absolute; left: 5.5rem; "></i>
                                                 @endif
-                                                
+
                                                 <br>
                                             @endforeach
                                         </div>

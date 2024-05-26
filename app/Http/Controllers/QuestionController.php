@@ -13,7 +13,7 @@ class QuestionController extends Controller
 {
     function index(string $id)
     {
-        $data = Question::where('section_id', $id)->get();
+        $data = Question::where('section_id', $id)->get()->sortBy('que_num');
         $sec = Section::where('id', $id)->first();
         return view('admin/question/index')
             ->with(
@@ -70,7 +70,10 @@ class QuestionController extends Controller
 
         // create option
             $request->validate([
-                'opt_img_a' => 'image|file',
+                'opt_content_a' => 'required',
+                'opt_content_b' => 'required',
+                
+		'opt_img_a' => 'image|file',
                 'opt_img_b' => 'image|file',
                 'opt_img_c' => 'image|file',
                 'opt_img_d' => 'image|file'

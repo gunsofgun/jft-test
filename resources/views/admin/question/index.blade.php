@@ -61,38 +61,56 @@
                                                 </td>
                                                 <td>{{ $item->que_score }}</td>
                                                 <td>
-                                                    @if ($item->group_options[0]->opt_title != null)
-                                                        <p>{{ $item->group_options[0]->opt_title }}</p>
+                                                    @if ($item->group_options->isEmpty())
+                                                        <p>-</p>
+                                                    @else
+                                                        @if ($item->group_options[0]->opt_title != null)
+                                                            <p>{{ $item->group_options[0]->opt_title }}</p>
+                                                        @endif
+
+                                                        @foreach ($item->group_options[0]->options as $item_opt)
+                                                            @if ($item_opt->opt_content != null)
+                                                                <p>{{ chr($loop->index + 65) }}. {{ $item_opt->opt_content }}</p>
+                                                            @endif
+
+                                                            @if ($item_opt->opt_img != null)
+                                                                <p>
+                                                                    {{ chr($loop->index + 65) }}. 
+                                                                    <img src="{{ url('storage/' . $item_opt->opt_img) }}" alt="Image Option {{ chr($loop->index + 65) }}" width="100">
+                                                                </p>
+                                                            @endif
+                                                        @endforeach
                                                     @endif
-
-                                                    @foreach ($item->group_options[0]->options as $item_opt)
-                                                        @if ($item_opt->opt_content != null)
-                                                            <p>{{ chr($loop->index + 65) }}. {{ $item_opt->opt_content }}</p>
-                                                        @endif
-
-                                                        @if ($item_opt->opt_img != null)
-                                                            <p>
-                                                                {{ chr($loop->index + 65) }}. 
-                                                                <img src="{{ URL::asset('storage/' . $item_opt->opt_img); }}" alt="Image Option {{ chr($loop->index + 65) }}" width="100">
-                                                            </p>
-                                                        @endif
-                                                    @endforeach
                                                 </td>
                                                 <td>
-                                                    <p>{{ $item->group_options[0]->opt_correct }}</p>
+                                                    @if ($item->group_options->isEmpty())
+                                                        <p>-</p>
+                                                    @else
+                                                        <p>{{ $item->group_options[0]->opt_correct }}</p>
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="/question/{{ $item->id }}" class="btn btn-warning me-3">Edit</a>
-                                                    <button 
-                                                        type="button" 
-                                                        class="btn btn-danger my-2" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#deleteModal" 
-                                                        data-id="{{ $item->group_options[0]->id }}" 
-                                                        data-id-s="{{ $item->section_id }}"
-                                                    >
-                                                        Delete
-                                                    </button>
+                                                    @if ($item->group_options->isEmpty())
+                                                        <button 
+                                                            type="button" 
+                                                            class="btn btn-danger my-2" 
+                                                            disabled
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    @else
+                                                        <button 
+                                                            type="button" 
+                                                            class="btn btn-danger my-2" 
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#deleteModal" 
+                                                            data-id="{{ $item->group_options[0]->id }}" 
+                                                            data-id-s="{{ $item->section_id }}"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -122,12 +140,12 @@
                 <hr>
                 <div class="mb-3">
                     <label for="que_num" class="form-label">Nomor Soal</label>
-                    <input type="text" class="form-control" id="que_num" name="que_num">
+                    <input type="text" class="form-control" id="que_num" name="que_num" required>
                 </div>
                 
                 <div class="mb-3">
                     <label for="que_content" class="form-label">Isi Soal</label>
-                    <textarea class="form-control" id="que_content" rows="3" name="que_content"></textarea>
+                    <textarea class="form-control" id="que_content" rows="3" name="que_content" required></textarea>
                 </div>
                 
                 <div class="mb-3">
@@ -152,7 +170,7 @@
 
                 <div class="mb-5">
                     <label for="que_score" class="form-label">Bobot Soal</label>
-                    <input type="text" class="form-control" id="que_score" name="que_score">
+                    <input type="text" class="form-control" id="que_score" name="que_score" required>
                 </div>
 
                 <h4>Pilihan</h4>
