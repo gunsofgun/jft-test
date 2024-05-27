@@ -37,7 +37,7 @@ class JftTestConstroller extends Controller
         $data_package = PackageTest::where('id', Auth::user()->package)->first();
         $data_question = Question::where('section_id', $ids)->get()->sortBy('que_num');
         $latest_q = $data_question->last();
-	$selected_question = $data_question->where('que_num', $num)->first();
+	    $selected_question = $data_question->where('que_num', $num)->first();
 
         $user_answer_check = UserAnswer::where('user_id', $id_user)->first();
         $user_answered_details = UserAnswerDetail::where('user_answer_id', $user_answer_check->id)->get();
@@ -108,7 +108,7 @@ class JftTestConstroller extends Controller
                 $sec_id = $sec_id + 1;
             }
             
-            $question_num = 1;
+            $question_num = $section_find->que_num;
         }
 
 
@@ -133,9 +133,11 @@ class JftTestConstroller extends Controller
         
         $correct_data = GroupOption::get();
         $answered = UserAnswerDetail::where('user_answer_id', $user_answer->id)->get();
+        $questions = Question::get();
 
         $userAnswerDetails = $answered->toArray();
         $groupOptions = $correct_data->toArray();
+        $questionsArr = $questions->toArray();
 
         // Iterasi melalui detail jawaban pengguna
         foreach ($userAnswerDetails as $userAnswerDetail) {
@@ -147,15 +149,20 @@ class JftTestConstroller extends Controller
                 return $option['question_id'] == $userAnswerDetail['question_test_id'];
             });
 
+            $scoreQuestion = array_filter($questionsArr, function ($que) use ($userAnswerDetail) {
+                return $que['id'] == $userAnswerDetail['question_test_id'];
+            });
+
             // Jika opsi grup ditemukan
             if (!empty($groupOption)) {
                 // Mengambil opt_correct dari opsi grup
                 $optCorrect = reset($groupOption)['opt_correct'];
+                $scoreQ = reset($scoreQuestion)['que_score'];
 
                 // Membandingkan answer_char dan opt_correct
                 if ($answerChar === $optCorrect) {
                     // Jika benar, menambahkan nilai $sum_correct
-                    $sum_correct++;
+                    $sum_correct = $sum_correct + $scoreQ;
                 }
             }
         }
@@ -163,59 +170,49 @@ class JftTestConstroller extends Controller
         // Hasil akhir jumlah jawaban yang benar dikali 4
         $data_user = Auth::user();
 
-        // Perhitungan per section
-        $questions = Question::get();
         $group_option = GroupOption::get();
 
-        $section_correct_counts = [];
-        $section_question_counts = [];
+        $sectionScores = [];
+        $sectionQuestionCounts = [];
 
-        // Iterasi melalui pertanyaan
+        // Inisialisasi array untuk menyimpan skor per section
+        foreach ($answered as $userAnswerDetail) {
+            $sectionId = $userAnswerDetail->section_id;
+            $sectionScores[$sectionId] = 0;
+            $sectionQuestionCounts[$sectionId] = 0;
+        }
+
+        // Hitung jumlah soal per section
         foreach ($questions as $question) {
-            // Ambil section_id dari pertanyaan
-            $section_id = $question['section_id'];
+            if (isset($sectionQuestionCounts[$question->section_id])) {
+                $sectionQuestionCounts[$question->section_id]++;
+            }
+        }
 
-            // Filter jawaban pengguna berdasarkan pertanyaan dan section_id
-            $userAnswerDetailsForQuestion = array_filter($userAnswerDetails, function ($userAnswerDetail) use ($question, $section_id) {
-                return $userAnswerDetail['question_test_id'] == $question['id'] && $userAnswerDetail['section_id'] == $section_id;
-            });
+        // Iterasi setiap jawaban pengguna dan hitung skor
+        foreach ($answered as $userAnswerDetail) {
+            $questionId = $userAnswerDetail->question_test_id;
+            $correctOption = $group_option->where('question_id', $questionId)->where('opt_correct', $userAnswerDetail->answer_char)->first();
 
-            // Inisialisasi jumlah benar untuk bagian ini
-            $section_correct_counts[$section_id] = 0;
-
-            // Jika tidak ada jawaban pengguna untuk pertanyaan ini, lanjutkan ke pertanyaan berikutnya
-            if (empty($userAnswerDetailsForQuestion)) {
+            // Jika jawaban tidak ditemukan, lanjutkan ke jawaban pengguna berikutnya
+            if (!$correctOption) {
                 continue;
             }
 
-            // Ambil opt_correct dari pertanyaan (question)
-            $optCorrect = $group_option[$question->id-1]['opt_correct'];
-
-            // Iterasi melalui jawaban pengguna untuk pertanyaan ini
-            foreach ($userAnswerDetailsForQuestion as $userAnswerDetail) {
-                // Ambil answer_char dari jawaban pengguna
-                $answerChar = $userAnswerDetail['answer_char'];
-
-                // Bandingkan answer_char dengan opt_correct
-                if ($answerChar === $optCorrect) {
-                    // Jika benar, tambahkan 1 ke jumlah benar untuk bagian ini
-                    $section_correct_counts[$section_id]++;
-                }
+            // Bandingkan jawaban pengguna dengan jawaban yang benar
+            if ($userAnswerDetail->answer_char == $correctOption->opt_correct) {
+                // Jika benar, tambahkan skor pertanyaan ke skor section
+                $sectionScores[$userAnswerDetail->section_id] += 1; // Misalnya, tambahkan 1 ke skor setiap pertanyaan yang benar
             }
-
-            if (!isset($section_question_counts[$section_id])) {
-                $section_question_counts[$section_id] = 0;
-            }
-            $section_question_counts[$section_id]++;
         }
 
         // Send Data
         $data = [
             'user' => $data_user,
-            'total_point' => $sum_correct*4,
-            'total_que' => count($correct_data)*4,
-            'total_correct_section' => $section_correct_counts,
-            'total_que_section' => $section_question_counts,
+            'total_point' => $sum_correct,
+            'total_que' => count($correct_data),
+            'total_correct_section' => $sectionScores,
+            'total_que_section' => $sectionQuestionCounts,
         ];
 
         $file_name = strtolower($data_user->name);

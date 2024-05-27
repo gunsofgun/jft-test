@@ -102,7 +102,7 @@
         #myBarA {
             border-style: solid 0;
             border-radius: 10px;
-            width: 91%;
+            width: {{ ($total_correct_section[1] / $total_que_section[1]) * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -113,7 +113,7 @@
         #myBarB {
             border-style: solid 0;
             border-radius: 10px;
-            width: 75%;
+            width: {{ ($total_correct_section[2] / $total_que_section[2]) * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -124,7 +124,7 @@
         #myBarC {
             border-style: solid 0;
             border-radius: 10px;
-            width: 75%;
+            width: {{ ($total_correct_section[3] / $total_que_section[3]) * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -135,7 +135,7 @@
         #myBarD {
             border-style: solid 0;
             border-radius: 10px;
-            width: 83%;
+            width: {{ ($total_correct_section[4] / $total_que_section[4]) * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -250,8 +250,6 @@
                                 </div>
                             </div>
 
-                            @dd($total_correct_section)
-
                             <p class="mt-3">
                                 あなたは一定レベルの日本語能力に達していると評価されました国際交流基金基礎日本語能力試験
                             </p>
@@ -278,7 +276,7 @@
                                         <p>Script and Vocabulary</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        91%
+                                        {{ ($total_correct_section[1] / $total_que_section[1]) * 100 }}%
                                         <div id="myProgress">
                                             <div id="myBarA"></div>
                                         </div>
@@ -290,7 +288,7 @@
                                         <p>Conversation and Expression</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        75%
+                                        {{ ($total_correct_section[2] / $total_que_section[2]) * 100 }}%
                                         <div id="myProgress">
                                             <div id="myBarB"></div>
                                         </div>
@@ -302,7 +300,7 @@
                                         <p>Listening Comprehension</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        75%
+                                        {{ ($total_correct_section[3] / $total_que_section[3]) * 100 }}%
                                         <div id="myProgress">
                                             <div id="myBarC"></div>
                                         </div>
@@ -314,7 +312,7 @@
                                         <p>Reading Comprehension</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        83%
+                                        {{ ($total_correct_section[4] / $total_que_section[4]) * 100 }}%
                                         <div id="myProgress">
                                             <div id="myBarD"></div>
                                         </div>
