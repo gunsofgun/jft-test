@@ -25,7 +25,7 @@
                         @endforeach
                     </div>
 
-                    {{-- <h2 class="text-center mt-5">Hasil Test</h2>
+                    <h2 class="text-center mt-5">Hasil Test</h2>
                     <hr>
                     <div class="mx-3">
                         <table class="table table-striped table-bordered table-hover mt-3">
@@ -42,35 +42,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($result) == 0)
+                                @foreach ($result as $item)
                                     <tr>
-                                        <td colspan="8" class="text-center">Data Kosong!</td>
-                                    </tr>
-                                @else
-                                    @foreach ($result as $item)
+                                        <td>{{ $loop->index+1 }}</td>
+                                        <td>{{ $item['name'] }}</td>
+                                        <td>{{ $item['total_point'] }}</td>
+
                                         @if (count($item['total_correct_section']) == 0)
-                                            <tr>
-                                                <td colspan="8" class="text-center">Data Kosong!</td>
-                                            </tr>
+                                            <td colspan="4" class="text-center">Data Kosong!</td>
                                         @else
-                                            <tr>
-                                                <td>{{ $loop->index+1 }}</td>
-                                                <td>{{ $item['name'] }}</td>
-                                                <td>{{ $item['total_point'] }}</td>
-                                                <td>{{ ($item['total_correct_section'][1] / $item['total_que_section'][1]) * 100 }}%</td>
-                                                <td>{{ ($item['total_correct_section'][2] / $item['total_que_section'][2]) * 100 }}%</td>
-                                                <td>{{ ($item['total_correct_section'][3] / $item['total_que_section'][3]) * 100 }}%</td>
-                                                <td>{{ ($item['total_correct_section'][4] / $item['total_que_section'][4]) * 100 }}%</td>
-                                                <td class="text-center">
-                                                    <a href="/result-test/download/pdf/{{ $item['user_id'] }}" class="btn btn-green">Download Result</a>
-                                                </td>
-                                            </tr>
+                                            @for ($i = 1; $i < 5; $i++)
+                                                @if(isset($item['total_correct_section'][$i]))
+                                                    <td>{{ number_format(($item['total_correct_section'][$i] / $item['total_que_section'][$i]) * 100 , 2) }}%</td>
+                                                @else
+                                                    <td>
+                                                        0%
+                                                    </td>
+                                                @endif
+                                            @endfor
                                         @endif
-                                    @endforeach
-                                @endif
+                                        <td class="text-center">
+                                            {{ isset($item['total_correct_section'][1]) && $item['total_correct_section'][1] < 0 ? 'disabled' : '' }}
+
+                                            <a href="/result-test/download/pdf/{{ $item['user_id'] }}" 
+                                            class="btn btn-green {{ count($item['total_correct_section']) == 0 ? 'disabled' : '' }} ">Download Result</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>

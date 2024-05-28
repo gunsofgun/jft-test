@@ -156,22 +156,22 @@
 
                 <div class="biodata mt-2">
 
-                    <table class="table-bio">
+                    <table class="table-bio" style="width: 100%">
                         <tr>
-                            <td style="width: 20%">
+                            <td style="width: 50%; text-align: center;">
                                 <h6>名前</h6>
                                 <h5>Name</h5>
                             </td>
-                            <td style="width: 30%">
+                            <td style="width: 50%;">
                                 <p>: {{ $user->name }}</p>
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 20%">
+                            <td style="width: 50%; text-align: center;">
                                 <h6>Eメール</h6>
                                 <h5>Email</h5>
                             </td>
-                            <td style="width: 30%">
+                            <td style="width: 50%;">
                                 <p>: {{ $user->email }}</p>
                             </td>
                         </tr>
@@ -240,7 +240,22 @@
                             </table>
 
                             <div class="range">
-                                200
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="width: 100%;">
+                                            0
+                                        </td>
+                                        <td style="width: 100%;">
+                                            
+                                        </td>
+                                        <td style="width: 100%; text-align: right;">
+                                            200
+                                        </td>
+                                        <td style="width: 100%; text-align: right;">
+                                            250
+                                        </td>
+                                    </tr>
+                                </table>
                                 <div id="myProgress">
                                     <div id="currBar"></div>
                                 </div>
@@ -276,7 +291,7 @@
                                         <p>Script and Vocabulary</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ ($total_correct_section[1] / $total_que_section[1]) * 100 }}%
+                                        {{ number_format((($total_correct_section[1] / $total_que_section[1]) * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarA"></div>
                                         </div>
@@ -288,7 +303,7 @@
                                         <p>Conversation and Expression</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ ($total_correct_section[2] / $total_que_section[2]) * 100 }}%
+                                        {{ number_format((($total_correct_section[2] / $total_que_section[2]) * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarB"></div>
                                         </div>
@@ -300,7 +315,7 @@
                                         <p>Listening Comprehension</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ ($total_correct_section[3] / $total_que_section[3]) * 100 }}%
+                                        {{ number_format((($total_correct_section[3] / $total_que_section[3]) * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarC"></div>
                                         </div>
@@ -312,7 +327,7 @@
                                         <p>Reading Comprehension</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ ($total_correct_section[4] / $total_que_section[4]) * 100 }}%
+                                        {{ number_format((($total_correct_section[4] / $total_que_section[4]) * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarD"></div>
                                         </div>
