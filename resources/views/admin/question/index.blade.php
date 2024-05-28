@@ -145,7 +145,7 @@
                 
                 <div class="mb-3">
                     <label for="que_content" class="form-label">Isi Soal</label>
-                    <textarea class="form-control" id="que_content" rows="3" name="que_content" required></textarea>
+                    <textarea class="form-control" id="que_content" rows="3" name="que_content"></textarea>
                 </div>
                 
                 <div class="mb-3">
@@ -291,5 +291,41 @@
         $(".modal-footer #group_option_id").val( gOpId );
         $(".modal-footer #section_id").val( secId );
     })
+
+    ClassicEditor
+        .create( document.querySelector( '#que_content' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#que_content_eng' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#que_content_ind' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_a' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_b' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_c' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_d' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 </script>
 @endsection

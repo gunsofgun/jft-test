@@ -63,14 +63,14 @@
                                         </div>
                                         <div class="col">
                                             <div class="question-content">
-                                                <h4>{{ $que_selected->que_content }}</h4>
+                                                <h4><?php echo $que_selected->que_content; ?></h4>
 
                                                 <div>
-                                                    <button type="button" class="btn btn-outline-green mt-3" data-bs-toggle="popover" data-bs-title="Bahasa Indonesia" data-bs-content="{{ $que_selected->que_content_ind }}">Your Language 1 <i class="bi bi-box-arrow-up-right ms-2"></i></button>
+                                                    <button type="button" class="btn btn-outline-green mt-3" data-bs-toggle="popover" data-bs-title="Bahasa Indonesia" data-bs-content="<?php echo $que_selected->que_content_ind ?>">Your Language 1 <i class="bi bi-box-arrow-up-right ms-2"></i></button>
                                                 </div>
 
                                                 <div>
-                                                    <button type="button" class="btn btn-outline-green my-3" data-bs-toggle="popover" data-bs-title="English" data-bs-content="{{ $que_selected->que_content_eng }}">Your Language 2 <i class="bi bi-box-arrow-up-right ms-2"></i></button>
+                                                    <button type="button" class="btn btn-outline-green my-3" data-bs-toggle="popover" data-bs-title="English" data-bs-content="<?php echo $que_selected->que_content_eng ?>">Your Language 2 <i class="bi bi-box-arrow-up-right ms-2"></i></button>
                                                 </div>
 
                                                 @if ($que_selected->que_audio != null)
@@ -95,7 +95,7 @@
 
                                                 <div class="my-4">
                                                     @if ($que_selected->que_img != null)
-                                                        <img src="{{ URL::asset('storage/' . $que_selected->que_img); }}" alt="Image Question {{ $que_selected->que_num }}" width="100">
+                                                        <img style="max-width: 540px" src="{{ URL::asset('storage/' . $que_selected->que_img); }}" alt="Image Question {{ $que_selected->que_num }}" class="img-thumbnail">
                                                     @endif
                                                 </div>
 
@@ -104,7 +104,7 @@
                                                         @foreach ($que_selected->group_options[0]->options as $item)
                                                             @if ($item->opt_content != null) 
                                                                 <button id="option-btn" class="btn btn-outline-green text-dark py-2" type="button" onclick="changeStyle(this)" data-char="{{ $item->opt_char }}">
-                                                                    <span style="font-size: 20pt;">{{ $item->opt_char }}. {{ $item->opt_content }}</span>
+                                                                    <span style="font-size: 20pt;">{{ $item->opt_char }}. <?php echo $item->opt_content ?> </span>
                                                                 </button>
                                                             @endif
                                                             @if ($item->opt_img != null)
