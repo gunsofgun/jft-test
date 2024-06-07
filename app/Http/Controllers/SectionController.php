@@ -36,6 +36,8 @@ class SectionController extends Controller
                 $userAnswerDetails = $answered->toArray();
                 $groupOptions = $correct_data->toArray();
                 $questionsArr = $questions->toArray();
+
+                $firstSection = 1;
     
                 // Iterasi melalui detail jawaban pengguna
                 foreach ($userAnswerDetails as $userAnswerDetail) {
@@ -76,6 +78,10 @@ class SectionController extends Controller
                     $sectionId = $userAnswerDetail->section_id;
                     $sectionScores[$sectionId] = 0;
                     $sectionQuestionCounts[$sectionId] = 0;
+
+                    if ($sectionId > 4) {
+                        $firstSection = 5;
+                    }
                 }
     
                 // Hitung jumlah soal per section
@@ -101,14 +107,21 @@ class SectionController extends Controller
                         $sectionScores[$userAnswerDetail->section_id] += 1; // Misalnya, tambahkan 1 ke skor setiap pertanyaan yang benar
                     }
                 }
+
+                $persenOne = isset($sectionScores[$firstSection]) ? ($sectionScores[$firstSection] / $sectionQuestionCounts[$firstSection]) : 0;
+                $persenTwo = isset($sectionScores[$firstSection + 1]) ? ($sectionScores[$firstSection + 1] / $sectionQuestionCounts[$firstSection + 1]) : 0;
+                $persenThree = isset($sectionScores[$firstSection + 2]) ? ($sectionScores[$firstSection + 2] / $sectionQuestionCounts[$firstSection + 2]) : 0;
+                $persenFour = isset($sectionScores[$firstSection + 3]) ? ($sectionScores[$firstSection + 3] / $sectionQuestionCounts[$firstSection + 3]) : 0;
     
                 // Send Data
                 $data = [
                     'name' => $user->name,
                     'user_id' => $user->id,
                     'total_point' => $sum_correct,
-                    'total_correct_section' => $sectionScores,
-                    'total_que_section' => $sectionQuestionCounts,
+                    'persenOne' => $persenOne,
+                    'persenTwo' => $persenTwo,
+                    'persenThree' => $persenThree,
+                    'persenFour' => $persenFour,
                 ];
     
                 $usersResult[$i] = $data;
@@ -122,9 +135,6 @@ class SectionController extends Controller
                     'data' => $data,
                     'result' => $usersResult
                 ]);
-
-        // $data = Section::where('package_test_id', $id)->get();
-        // return view('admin/section/index')->with('data', $data);
     }
 
     function download_pdf(string $uid)
@@ -141,6 +151,8 @@ class SectionController extends Controller
         $userAnswerDetails = $answered->toArray();
         $groupOptions = $correct_data->toArray();
         $questionsArr = $questions->toArray();
+
+        $firstSection = 1;
 
         // Iterasi melalui detail jawaban pengguna
         foreach ($userAnswerDetails as $userAnswerDetail) {
@@ -183,6 +195,10 @@ class SectionController extends Controller
             $sectionId = $userAnswerDetail->section_id;
             $sectionScores[$sectionId] = 0;
             $sectionQuestionCounts[$sectionId] = 0;
+
+            if($sectionId > 4) {
+                $firstSection = 5;
+            }
         }
 
         // Hitung jumlah soal per section
@@ -209,13 +225,20 @@ class SectionController extends Controller
             }
         }
 
+        $persenOne = isset($sectionScores[$firstSection]) ? ($sectionScores[$firstSection] / $sectionQuestionCounts[$firstSection]) : 0;
+        $persenTwo = isset($sectionScores[$firstSection + 1]) ? ($sectionScores[$firstSection + 1] / $sectionQuestionCounts[$firstSection + 1]) : 0;
+        $persenThree = isset($sectionScores[$firstSection + 2]) ? ($sectionScores[$firstSection + 2] / $sectionQuestionCounts[$firstSection + 2]) : 0;
+        $persenFour = isset($sectionScores[$firstSection + 3]) ? ($sectionScores[$firstSection + 3] / $sectionQuestionCounts[$firstSection + 3]) : 0;
+
         // Send Data
         $data = [
             'user' => $data_user,
             'total_point' => $sum_correct,
             'total_que' => count($correct_data),
-            'total_correct_section' => $sectionScores,
-            'total_que_section' => $sectionQuestionCounts,
+            'persenOne' => $persenOne,
+            'persenTwo' => $persenTwo,
+            'persenThree' => $persenThree,
+            'persenFour' => $persenFour,
         ];
 
         $file_name = strtolower($data_user->name);

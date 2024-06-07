@@ -48,24 +48,27 @@
                                         <td>{{ $item['name'] }}</td>
                                         <td>{{ $item['total_point'] }}</td>
 
-                                        @if (count($item['total_correct_section']) == 0)
+                                        @if (
+                                            $item['persenOne'] == 0 &&
+                                            $item['persenTwo'] == 0 &&
+                                            $item['persenThree'] == 0 &&
+                                            $item['persenFour'] == 0
+                                        )
                                             <td colspan="4" class="text-center">Data Kosong!</td>
                                         @else
-                                            @for ($i = 1; $i < 5; $i++)
-                                                @if(isset($item['total_correct_section'][$i]))
-                                                    <td>{{ number_format(($item['total_correct_section'][$i] / $item['total_que_section'][$i]) * 100 , 2) }}%</td>
-                                                @else
-                                                    <td>
-                                                        0%
-                                                    </td>
-                                                @endif
-                                            @endfor
+                                            <td>{{ number_format($item['persenOne'] * 100 , 2) }}%</td>
+                                            <td>{{ number_format($item['persenTwo'] * 100 , 2) }}%</td>
+                                            <td>{{ number_format($item['persenThree'] * 100 , 2) }}%</td>
+                                            <td>{{ number_format($item['persenFour'] * 100 , 2) }}%</td>
                                         @endif
                                         <td class="text-center">
                                             {{ isset($item['total_correct_section'][1]) && $item['total_correct_section'][1] < 0 ? 'disabled' : '' }}
 
                                             <a href="/result-test/download/pdf/{{ $item['user_id'] }}" 
-                                            class="btn btn-green {{ count($item['total_correct_section']) == 0 ? 'disabled' : '' }} ">Download Result</a>
+                                              class="
+                                                btn btn-green 
+                                                {{ ($item['persenOne'] == 0 && $item['persenTwo'] == 0 && $item['persenThree'] == 0 && $item['persenFour'] == 0) ? 'disabled' : '' }} "
+                                            >Download Result</a>
                                         </td>
                                     </tr>
                                 @endforeach

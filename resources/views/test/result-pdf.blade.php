@@ -102,7 +102,7 @@
         #myBarA {
             border-style: solid 0;
             border-radius: 10px;
-            width: {{ ($total_correct_section[1] / $total_que_section[1]) * 100 }}%;
+            width: {{ $persenOne * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -113,7 +113,7 @@
         #myBarB {
             border-style: solid 0;
             border-radius: 10px;
-            width: {{ ($total_correct_section[2] / $total_que_section[2]) * 100 }}%;
+            width: {{ $persenTwo * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -124,7 +124,7 @@
         #myBarC {
             border-style: solid 0;
             border-radius: 10px;
-            width: {{ ($total_correct_section[3] / $total_que_section[3]) * 100 }}%;
+            width: {{ $persenThree * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -135,7 +135,7 @@
         #myBarD {
             border-style: solid 0;
             border-radius: 10px;
-            width: {{ ($total_correct_section[4] / $total_que_section[4]) * 100 }}%;
+            width: {{ $persenFour * 100 }}%;
             height: 20px;
             background-color: green;
             text-align: end;
@@ -291,7 +291,7 @@
                                         <p>Script and Vocabulary</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ number_format((($total_correct_section[1] / $total_que_section[1]) * 100),2)  }}%
+                                        {{ number_format(($persenOne * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarA"></div>
                                         </div>
@@ -303,7 +303,7 @@
                                         <p>Conversation and Expression</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ number_format((($total_correct_section[2] / $total_que_section[2]) * 100),2)  }}%
+                                        {{ number_format(($persenTwo * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarB"></div>
                                         </div>
@@ -315,7 +315,7 @@
                                         <p>Listening Comprehension</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ number_format((($total_correct_section[3] / $total_que_section[3]) * 100),2)  }}%
+                                        {{ number_format(($persenThree * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarC"></div>
                                         </div>
@@ -327,7 +327,7 @@
                                         <p>Reading Comprehension</p>
                                     </td>
                                     <td style="width: 50%;">
-                                        {{ number_format((($total_correct_section[4] / $total_que_section[4]) * 100),2)  }}%
+                                        {{ number_format(($persenFour * 100),2)  }}%
                                         <div id="myProgress">
                                             <div id="myBarD"></div>
                                         </div>
