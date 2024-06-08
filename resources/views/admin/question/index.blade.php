@@ -70,7 +70,9 @@
 
                                                         @foreach ($item->group_options[0]->options as $item_opt)
                                                             @if ($item_opt->opt_content != null)
-                                                                <p>{{ chr($loop->index + 65) }}. <?php echo $item_opt->opt_content; ?></p>
+                                                                <div id="p-inline">
+                                                                    {{ chr($loop->index + 65) }}. <?php echo $item_opt->opt_content; ?>
+                                                                </div>
                                                             @endif
 
                                                             @if ($item_opt->opt_img != null)

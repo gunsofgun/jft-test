@@ -2,6 +2,9 @@ body {
     background-color: #f2f4f5;
 }
 
+#p-inline p {
+    display: inline;
+}
 .i-menu {
     font-size: 2rem; 
     color: white;

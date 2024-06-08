@@ -104,7 +104,7 @@
                                                         @foreach ($que_selected->group_options[0]->options as $item)
                                                             @if ($item->opt_content != null) 
                                                                 <button id="option-btn" class="btn btn-outline-green text-dark py-2" type="button" onclick="changeStyle(this)" data-char="{{ $item->opt_char }}">
-                                                                    <span style="font-size: 20pt;">{{ $item->opt_char }}. <?php echo $item->opt_content ?> </span>
+                                                                    <span id="p-inline" style="font-size: 20pt;">{{ $item->opt_char }}. <?php echo $item->opt_content ?> </span>
                                                                 </button>
                                                             @endif
                                                             @if ($item->opt_img != null)
