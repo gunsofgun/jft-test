@@ -19,22 +19,22 @@
                                     <h4>Soal</h4>
                                     <hr>
                                     <div class="mb-3">
-                                        <label for="que_num" class="form-label">Nomor Soal</label>
+                                        <label for="que_num" class="form-label fw-semibold">Nomor Soal <span class="text-danger fw-bold">*</span></label>
                                         <input type="text" class="form-control" id="que_num" name="que_num" value="{{ $data->que_num }}">
                                     </div>
                                                                         
                                     <div class="mb-3">
-                                        <label for="que_content" class="form-label">Isi Soal</label>
+                                        <label for="que_content" class="form-label fw-semibold">Isi Soal <span class="text-danger fw-bold">*</span></label>
                                         <textarea class="form-control" id="que_content" rows="3" name="que_content" >{{ $data->que_content }}</textarea>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="que_content_eng" class="form-label">Isi Soal (eng)</label>
+                                        <label for="que_content_eng" class="form-label fw-semibold">Isi Soal (eng)</label>
                                         <textarea class="form-control" id="que_content_eng" rows="3" name="que_content_eng" >{{ $data->que_content_eng }}</textarea>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="que_content_ind" class="form-label">Isi Soal (ind)</label>
+                                        <label for="que_content_ind" class="form-label fw-semibold">Isi Soal (ind)</label>
                                         <textarea class="form-control" id="que_content_ind" rows="3" name="que_content_ind" >{{ $data->que_content_ind }}</textarea>
                                     </div>
 
@@ -45,7 +45,7 @@
                                             <p>No Audio</p>
                                         @endif
 
-                                        <label for="que_audio" class="form-label">Audio</label>
+                                        <label for="que_audio" class="form-label fw-semibold">Audio</label>
                                         <input class="form-control" type="file" id="que_audio" name="que_audio">
                                     </div>
 
@@ -56,19 +56,19 @@
                                             <p>No Image</p>
                                         @endif
 
-                                        <label for="que_img" class="form-label">Gambar</label>
+                                        <label for="que_img" class="form-label fw-semibold">Gambar</label>
                                         <input class="form-control" type="file" id="que_img" name="que_img">
                                     </div>
 
                                     <div class="mb-5">
-                                        <label for="que_score" class="form-label">Bobot Soal</label>
+                                        <label for="que_score" class="form-label fw-semibold">Bobot Soal <span class="text-danger fw-bold">*</span></label>
                                         <input type="text" class="form-control" id="que_score" name="que_score" value="{{ $data->que_score }}">
                                     </div>
 
                                     <h4>Pilihan</h4>
                                     <hr>
                                     <div class="mb-3">
-                                        <label for="opt_title" class="form-label">Title Pertanyaan</label>
+                                        <label for="opt_title" class="form-label fw-semibold">Title Pertanyaan</label>
 
                                         @if (isset($data->group_options[0]->opt_title))
                                             <input type="text" class="form-control" id="opt_title" name="opt_title" placeholder="Tambahkan title pertanyaan (opsional)" value="{{ $data->group_options[0]->opt_title }}">
@@ -78,7 +78,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="opt_correct" class="form-label">Jawaban Benar</label>
+                                        <label for="opt_correct" class="form-label fw-semibold">Jawaban Benar <span class="text-danger fw-bold">*</span></label>
                                         <select class="form-select" name="opt_correct" id="opt_correct" aria-label="Default select">
                                             <option value="" disabled selected>Silakan Pilih</option>
                                             <option value="A" {{ $data->group_options[0]->opt_correct == 'A' ? 'selected' : '' }}>A</option>
@@ -95,7 +95,7 @@
                                                 {{ chr($loop->index + 65) }}.
                                             </div>
                                             <div class="col-5">
-                                                <label for="opt_content_{{ strtolower(chr($loop->index + 65)) }}" class="form-label">Isi Opsi</label>
+                                                <label for="opt_content_{{ strtolower(chr($loop->index + 65)) }}" class="form-label fw-semibold">Isi Opsi</label>
                                                 <textarea class="form-control" id="opt_content_{{ strtolower(chr($loop->index + 65)) }}" rows="3" name="opt_content_{{ strtolower(chr($loop->index + 65)) }}" value="{{ $data_opt->opt_content }}">{{ $data_opt->opt_content }}</textarea>
                                             </div>
                                             <div class="col-6">
@@ -104,7 +104,7 @@
                                                 @else
                                                     <p>No Image</p>
                                                 @endif
-                                                <label for="opt_img_{{ strtolower(chr($loop->index + 65)) }}" class="form-label">Gambar Opsi</label>
+                                                <label for="opt_img_{{ strtolower(chr($loop->index + 65)) }}" class="form-label fw-semibold">Gambar Opsi</label>
                                                 <input class="form-control" type="file" id="opt_img_{{ strtolower(chr($loop->index + 65)) }}" name="opt_img_{{ strtolower(chr($loop->index + 65)) }}">
                                             </div>
                                         </div>
@@ -121,4 +121,42 @@
         </div>
     </div>
 </div>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#que_content' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#que_content_eng' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#que_content_ind' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_a' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_b' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_c' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#opt_content_d' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

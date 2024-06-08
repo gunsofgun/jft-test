@@ -40,7 +40,7 @@
                                     <div class="row">
                                         <div class="col-2">
                                             @foreach ($data_q as $item)
-						@php
+						                        @php
                                                     $answeredColor = 'btn-green';
                                                     $answeredColorCaret = '';
                                                     foreach ($que_answered_all as $answer) {

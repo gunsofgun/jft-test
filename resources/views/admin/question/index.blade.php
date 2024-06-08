@@ -17,7 +17,7 @@
                                     Tambah Soal
                                 </button>
                             </div>
-                            <table class="table table-striped table-bordered table-hover mt-3">
+                            <table id="content-table-questions" class="table table-striped table-bordered table-hover mt-3">
                                 <thead>
                                     <tr>
                                         <th scope="col">No.</th>
@@ -41,9 +41,9 @@
                                         @foreach ($data as $item)
                                             <tr>
                                                 <td>{{ $item->que_num }}</td>
-                                                <td>{{ $item->que_content }}</td>
-                                                <td>{{ $item->que_content_eng != null ? $item->que_content_eng : '-' }}</td>
-                                                <td>{{ $item->que_content_ind != null ? $item->que_content_ind : '-' }}</td>
+                                                <td><?php echo $item->que_content; ?></td>
+                                                <td><?php echo $item->que_content_eng != null ? $item->que_content_eng : '-'; ?></td>
+                                                <td><?php echo $item->que_content_ind != null ? $item->que_content_ind : '-'; ?></td>
 
                                                 <td>
                                                     @if ($item->que_audio != null)
@@ -70,7 +70,7 @@
 
                                                         @foreach ($item->group_options[0]->options as $item_opt)
                                                             @if ($item_opt->opt_content != null)
-                                                                <p>{{ chr($loop->index + 65) }}. {{ $item_opt->opt_content }}</p>
+                                                                <p>{{ chr($loop->index + 65) }}. <?php echo $item_opt->opt_content; ?></p>
                                                             @endif
 
                                                             @if ($item_opt->opt_img != null)
@@ -139,37 +139,37 @@
                 <h4>Soal</h4>
                 <hr>
                 <div class="mb-3">
-                    <label for="que_num" class="form-label">Nomor Soal</label>
+                    <label for="que_num" class="form-label fw-semibold">Nomor Soal <span class="text-danger fw-bold">*</span> </label>
                     <input type="text" class="form-control" id="que_num" name="que_num" required>
                 </div>
                 
                 <div class="mb-3">
-                    <label for="que_content" class="form-label">Isi Soal</label>
+                    <label for="que_content" class="form-label fw-semibold">Isi Soal <span class="text-danger fw-bold">*</span></label>
                     <textarea class="form-control" id="que_content" rows="3" name="que_content"></textarea>
                 </div>
                 
                 <div class="mb-3">
-                    <label for="que_content_eng" class="form-label">Isi Soal (eng)</label>
+                    <label for="que_content_eng" class="form-label fw-semibold">Isi Soal (eng)</label>
                     <textarea class="form-control" id="que_content_eng" rows="3" name="que_content_eng"></textarea>
                 </div>
                 
                 <div class="mb-3">
-                    <label for="que_content_ind" class="form-label">Isi Soal (ind)</label>
+                    <label for="que_content_ind" class="form-label fw-semibold">Isi Soal (ind)</label>
                     <textarea class="form-control" id="que_content_ind" rows="3" name="que_content_ind"></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label for="que_audio" class="form-label">Audio</label>
+                    <label for="que_audio" class="form-label fw-semibold">Audio</label>
                     <input class="form-control" type="file" id="que_audio" name="que_audio">
                 </div>
 
                 <div class="mb-3">
-                    <label for="que_img" class="form-label">Gambar</label>
+                    <label for="que_img" class="form-label fw-semibold">Gambar</label>
                     <input class="form-control" type="file" id="que_img" name="que_img">
                 </div>
 
                 <div class="mb-5">
-                    <label for="que_score" class="form-label">Bobot Soal</label>
+                    <label for="que_score" class="form-label fw-semibold">Bobot Soal <span class="text-danger fw-bold">*</span></label>
                     <input type="text" class="form-control" id="que_score" name="que_score" required>
                 </div>
 
@@ -177,12 +177,12 @@
                 <hr>
 
                 <div class="mb-3">
-                    <label for="opt_title" class="form-label">Title Pertanyaan</label>
+                    <label for="opt_title" class="form-label fw-semibold">Title Pertanyaan</label>
                     <input type="text" class="form-control" id="opt_title" name="opt_title" placeholder="Tambahkan title pertanyaan (opsional)">
                 </div>
 
                 <div class="mb-3">
-                    <label for="opt_correct" class="form-label">Jawaban Benar</label>
+                    <label for="opt_correct" class="form-label fw-semibold">Jawaban Benar <span class="text-danger fw-bold">*</span></label>
                     <select class="form-select" name="opt_correct" id="opt_correct" aria-label="Default select">
                         <option selected disabled>Silahkan Pilih</option>
                         <option value="A">A</option>
@@ -197,11 +197,11 @@
                         A.
                     </div>
                     <div class="col-5">
-                        <label for="opt_content_a" class="form-label">Isi Opsi</label>
+                        <label for="opt_content_a" class="form-label fw-semibold">Isi Opsi <span class="text-danger fw-bold">*</span></label>
                         <textarea class="form-control" id="opt_content_a" rows="3" name="opt_content_a"></textarea>
                     </div>
                     <div class="col-6">
-                        <label for="opt_img_a" class="form-label">Gambar Opsi</label>
+                        <label for="opt_img_a" class="form-label fw-semibold">Gambar Opsi</label>
                         <input class="form-control" type="file" id="opt_img_a" name="opt_img_a">
                     </div>
                 </div>
@@ -211,11 +211,11 @@
                         B.
                     </div>
                     <div class="col-5">
-                        <label for="opt_content_b" class="form-label">Isi Opsi</label>
+                        <label for="opt_content_b" class="form-label fw-semibold">Isi Opsi <span class="text-danger fw-bold">*</span></label>
                         <textarea class="form-control" id="opt_content_b" rows="3" name="opt_content_b"></textarea>
                     </div>
                     <div class="col-6">
-                        <label for="opt_img_b" class="form-label">Gambar Opsi</label>
+                        <label for="opt_img_b" class="form-label fw-semibold">Gambar Opsi</label>
                         <input class="form-control" type="file" id="opt_img_b" name="opt_img_b">
                     </div>
                 </div>
@@ -225,11 +225,11 @@
                         C.
                     </div>
                     <div class="col-5">
-                        <label for="opt_content_c" class="form-label">Isi Opsi</label>
+                        <label for="opt_content_c" class="form-label fw-semibold">Isi Opsi <span class="text-danger fw-bold">*</span></label>
                         <textarea class="form-control" id="opt_content_c" rows="3" name="opt_content_c"></textarea>
                     </div>
                     <div class="col-6">
-                        <label for="opt_img_c" class="form-label">Gambar Opsi</label>
+                        <label for="opt_img_c" class="form-label fw-semibold">Gambar Opsi</label>
                         <input class="form-control" type="file" id="opt_img_c" name="opt_img_c">
                     </div>
                 </div>
@@ -239,11 +239,11 @@
                         D.
                     </div>
                     <div class="col-5">
-                        <label for="opt_content_d" class="form-label">Isi Opsi</label>
+                        <label for="opt_content_d" class="form-label fw-semibold">Isi Opsi</label>
                         <textarea class="form-control" id="opt_content_d" rows="3" name="opt_content_d"></textarea>
                     </div>
                     <div class="col-6">
-                        <label for="opt_img_d" class="form-label">Gambar Opsi</label>
+                        <label for="opt_img_d" class="form-label fw-semibold">Gambar Opsi</label>
                         <input class="form-control" type="file" id="opt_img_d" name="opt_img_d">
                     </div>
                 </div>

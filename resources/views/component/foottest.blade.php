@@ -1,9 +1,9 @@
-<div >
+<div class="fixed-bottom">
     <div class="bg-green" style="height: 1vh">
     </div>
     <div class="bg-black">
         <div class="container">
-            <div class="row py-2">
+            <div class="row py-1">
                 <div class="col"></div>
                 <div class="col"></div>
                 <div class="col-md-5 text-end d-flex gap-2 justify-content-end">
@@ -16,11 +16,11 @@
                         <input type="hidden" name="movement" id="movement">
                     
                         <button class="invisible" type="submit" id="btnSubmit"></button>
-                        <button type="submit" class="btn btn-green fs-5 fw-semibold py-1" onclick="doMovement(this)" data-move="back" {{ ($que_selected->que_num == 1 && ($que_selected->section_id == 1 || $que_selected->section_id == 5)) ? 'disabled' : '' }}>
+                        <button type="submit" class="btn btn-green fs-6 fw-semibold" onclick="doMovement(this)" data-move="back" {{ ($que_selected->que_num == 1 && ($que_selected->section_id == 1 || $que_selected->section_id == 5)) ? 'disabled' : '' }}>
                             <i class="bi bi-caret-left" style="font-size: 1rem;"></i>
                             Back
                         </button>
-                        <button type="submit" class="btn btn-green fs-5 fw-semibold py-1" onclick="doMovement(this)" data-move="next" {{ $latest_q->id == $que_selected->id && ($que_selected->section_id == 4 || $que_selected->section_id == 8) ? 'disabled' : '' }}>
+                        <button type="submit" class="btn btn-green fs-6 fw-semibold" onclick="doMovement(this)" data-move="next" {{ $latest_q->id == $que_selected->id && ($que_selected->section_id == 4 || $que_selected->section_id == 8) ? 'disabled' : '' }}>
                             Next
                             <i class="bi bi-caret-right" style="font-size: 1rem;"></i>
                         </button>

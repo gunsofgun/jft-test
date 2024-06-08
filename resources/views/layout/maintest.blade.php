@@ -19,7 +19,7 @@
 <body>
     @include('component/menutest')
     
-    <div class="container">
+    <div class="container" style="margin-top: 6rem; margin-bottom: 4.5rem">
         <div class="mt-3">
             @include('component/message')
         </div>

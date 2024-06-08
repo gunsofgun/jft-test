@@ -1,7 +1,7 @@
-<div class="header">
+<div class="header fixed-top">
     <div class="bg-black">
         <div class="container">
-            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2">
+            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1">
                 <div class="col-md-4 mb-2 mb-md-0 text-white">
                     <p class="mb-0"><b>Question:</b> {{ $que_selected->que_num }} </p>
                     @if ($data_q[0]['section_id'] > 4)
