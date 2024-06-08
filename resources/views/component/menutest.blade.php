@@ -33,7 +33,7 @@
         <div class="container">
             <div class="row text-white">
                 <div class="col-6 ">
-                    <p class="mb-0"><b>Test:</b> Simulasi Japan Foundation Test for Basic Japanese</p>
+                    <p class="mb-0"><b>Test:</b> Simulation Japan Foundation Test for Basic Japanese</p>
                 </div>
                 <div class="col-6 text-end">
                     <p class="mb-0"><b>Candidate:</b> {{ Auth::user()->name }}</p>
